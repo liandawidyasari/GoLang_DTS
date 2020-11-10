@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Antrian</title>
+
+        <style>
+            .antrian {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .txt-antrian {
+                font-size: 70px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+<body>
+    <div class="antrian">
+        <span id="txt-antrian" class="txt-antrian">
+            {{ .antrian }}
+        </span>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to user
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        var firebaseConfig = {
+            apiKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDDcQbxNPWt8HWL,
+            authDomain: "https://push-notif-7db89.firebaseio.com",
+            databaseURL:"https://push-notif-7db89.firebaseio.com",
+            projectId: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-o6884%40push-notif-7db89.iam.gserviceaccount.com",
+            storageBucket: "https://www.googleapis.com/oauth2/v1/certs",
+            messagingSenderId:"https://oauth2.googleapis.com/token", 
+            appId: "100434157639625167359"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        car antrianRef = firebase.databse().ref('antrian');
+        antrianRef.on('value', function(snapshot) {
+            const antrian = snapshot.val()
+            const currentAntrian = antrian.find(item => item != null && item.status ====
+            false)
+
+            document.getElementById('txt-antrian').innerText = currentAntrian.id
+        });
+    </script>
+</body>
+</html>
